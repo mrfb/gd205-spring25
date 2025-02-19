@@ -24,12 +24,6 @@ class Ball{
   }
   
   // METHODS
-  void display(){
-    fill(fill_);
-    noStroke();
-    circle(position_.x, position_.y, radius_);
-  }
-  
   void update(){
     position_.add(velocity_);
     velocity_.add(acceleration_);
@@ -37,7 +31,17 @@ class Ball{
     // maybe constrain speed here
   }
   
+  void display(){
+    fill(fill_);
+    noStroke();
+    circle(position_.x, position_.y, radius_);
+  }
+  
   void setColor(color c){
     fill_ = c;
+  }
+  
+  PVector getPosition(){
+    return position_;
   }
 }

@@ -5,6 +5,7 @@ class Game{
   color backgroundColor; // background
   color spriteColor; // walls, ball
   color interactiveColor; // paddles / anything that is controllable
+  ArrayList<Zone> zones;
   
   // CONSTRUCTOR
   Game(){
@@ -16,13 +17,19 @@ class Game{
     b = new Ball(new PVector(-1, 0));
     b.setColor(spriteColor);
     
+    zones = new ArrayList<Zone>();
+    
+    Zone leftWall = new Zone(10, 10, 50, height - 20);
+    addZone(leftWall);
   }
   
   // METHODS
-  
   // Update positions each frame.
   void update(){
     b.update();
+    for(Zone z : zones){
+      z.update();
+    }
   }
   
   // Draw the game on the screen.
@@ -30,7 +37,13 @@ class Game{
     background(backgroundColor);
     
     b.display();
+    for(Zone z : zones){
+      z.display();
+    }
     
   }
   
+  void addZone(Zone z){
+    zones.add(z);
+  }
 }
