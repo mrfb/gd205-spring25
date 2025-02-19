@@ -1,9 +1,17 @@
+Game g;
 
+void setup(){
+  size(800, 600);
+  g = new Game();
+}
+
+void draw(){
+  g.update();
+  g.display();
+}
 
 // CLASSES
-// game: players, zones, background
-
-// command, observer
+// design patterns...? command, observer
 
 // ball (potentially multiple?): position, radius, fill
 
