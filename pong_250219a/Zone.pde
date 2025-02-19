@@ -3,25 +3,37 @@ class Zone{
   private PVector position_;
   private PVector size_;
   private color fill_ = #ff00ff;
+  private color stroke_ = #ff00ff;
   private Command collisionBehavior_;
   
   // CONSTRUCTORS
-  Zone(float x, float y, float w, float h){
+  Zone(float x, float y, float w, float h, String zoneType){
     position_ = new PVector(x, y);
     size_ = new PVector(w, h);
-    collisionBehavior_ = new Command();
+    switch(zoneType){
+      case "WALL":  
+        collisionBehavior_ = new Wall();
+        break;
+      case "GOAL":
+        collisionBehavior_ = new Goal();
+        break;
+      default:
+        collisionBehavior_ = new Notifier();
+        break;
+    }
+    
   }
   
   // METHODS
   void update(){
-    if(isColliding(g.b.getPosition())){
+    if(isColliding(g.getBall().getPosition())){
       collisionBehavior_.execute();
     }
   }
   
   void display(){
     fill(fill_);
-    noStroke();
+    stroke(stroke_);
     rect(position_.x, position_.y, size_.x, size_.y);
   }
   
@@ -39,5 +51,11 @@ class Zone{
   
   void setColor(color c){
     fill_ = c;
+    stroke_ = c;
+  }
+  
+  void setOpacity(int n){
+    // keeps outline visible at full opacity
+    fill_ = color(red(fill_), green(fill_), blue(fill_), n / 15.0);
   }
 }

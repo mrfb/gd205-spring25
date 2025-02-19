@@ -6,6 +6,7 @@ class Game{
   color spriteColor; // walls, ball
   color interactiveColor; // paddles / anything that is controllable
   ArrayList<Zone> zones;
+  ArrayList<Player> players;
   
   // CONSTRUCTOR
   Game(){
@@ -19,8 +20,31 @@ class Game{
     
     zones = new ArrayList<Zone>();
     
-    Zone leftWall = new Zone(10, 10, 50, height - 20);
+    // BUILD WALLS
+    Zone leftWall = new Zone(-10, -10, 20, height + 20, "WALL");
+    Zone rightWall = new Zone(width-10, -10, 20, height + 20, "WALL");
+    Zone topWall = new Zone(10, -10, width - 20, 20, "WALL");
+    Zone bottomWall = new Zone(10, height-10, width - 20, 20, "WALL");
     addZone(leftWall);
+    addZone(rightWall);
+    addZone(topWall);
+    addZone(bottomWall);
+    
+    // set everything to the non-interactive object color
+    for(Zone z : zones){
+      z.setColor(spriteColor);
+    }
+    
+    players = new ArrayList<Player>();
+    
+    Zone tempPaddle = new Zone(30, 30, 20, 50, "WALL");
+    Zone tempGoal = new Zone(width - 30, 10, 20, height - 20, "GOAL");
+    tempPaddle.setColor(interactiveColor);
+    tempGoal.setColor(interactiveColor);
+    addZone(tempPaddle);
+    addZone(tempGoal);
+    
+    
   }
   
   // METHODS
@@ -36,14 +60,19 @@ class Game{
   void display(){
     background(backgroundColor);
     
-    b.display();
     for(Zone z : zones){
       z.display();
     }
+    
+    b.display();
     
   }
   
   void addZone(Zone z){
     zones.add(z);
+  }
+  
+  Ball getBall(){
+    return b;
   }
 }
