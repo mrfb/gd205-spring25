@@ -56,6 +56,6 @@ class Zone{
   
   void setOpacity(int n){
     // keeps outline visible at full opacity
-    fill_ = color(red(fill_), green(fill_), blue(fill_), n / 15.0);
+    fill_ = color(red(fill_), green(fill_), blue(fill_), (n / 15.0) * 255);
   }
 }

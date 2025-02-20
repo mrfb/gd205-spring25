@@ -39,11 +39,10 @@ class Game{
     
     Zone tempPaddle = new Zone(30, 30, 20, 50, "WALL");
     Zone tempGoal = new Zone(width - 30, 10, 20, height - 20, "GOAL");
-    tempPaddle.setColor(interactiveColor);
-    tempGoal.setColor(interactiveColor);
-    addZone(tempPaddle);
-    addZone(tempGoal);
+    Player tempPlayer = new Player(tempPaddle, tempGoal, interactiveColor);
+    tempPlayer.setControls("WASD");
     
+    players.add(tempPlayer);
     
   }
   
@@ -54,6 +53,10 @@ class Game{
     for(Zone z : zones){
       z.update();
     }
+    
+    for(Player p : players){
+      p.update();
+    }
   }
   
   // Draw the game on the screen.
@@ -62,6 +65,10 @@ class Game{
     
     for(Zone z : zones){
       z.display();
+    }
+    
+    for(Player p : players){
+      p.display();
     }
     
     b.display();

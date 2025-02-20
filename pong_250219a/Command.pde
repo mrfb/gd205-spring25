@@ -16,9 +16,15 @@ class Wall implements Command{
 }
 
 class Goal implements Command{
+  Player p_;
+  
+  void setPlayer(Player p){
+    p_ = p;
+  }
   
   void execute(){
     // todo: add score to goal
+    
     println("Score!");
   }
 }

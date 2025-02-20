@@ -10,6 +10,18 @@ void draw(){
   g.display();
 }
 
+void keyPressed(){
+  for(Player p : g.players){
+    p.press(key);
+  }
+}
+
+void keyReleased(){
+  for(Player p : g.players){
+    p.release(key);
+  }
+}
+
 // CLASSES
 // design patterns...? command, observer
 
